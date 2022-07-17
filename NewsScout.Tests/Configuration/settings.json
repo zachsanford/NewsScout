@@ -1,9 +1,10 @@
-﻿{
-  "ApiKey": "YOUR_API_KEY_HERE",
+{
+  "ApiKey": "N3wK3y",
   "Country": [
     "us"
   ],
   "Language": [
-    "en"
+    "fr",
+    "de"
   ]
 }
