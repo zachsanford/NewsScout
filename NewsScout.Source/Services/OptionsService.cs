@@ -5,8 +5,7 @@
 
         #region Properties
 
-        // Country Code Dictionary
-        public static readonly Dictionary<string, string> Country = new Dictionary<string, string>()
+        public static IReadOnlyDictionary<string, string> Country { get; private set; } = new Dictionary<string, string>()
         {
             { "argentina", "ar" },
             { "australia", "au" },
@@ -86,7 +85,7 @@
         }
 
         // Language Code Dictionary
-        public static readonly Dictionary<string, string> Language = new Dictionary<string, string>()
+        public static IReadOnlyDictionary<string, string> Language { get; private set; } = new Dictionary<string, string>()
         {
             { "arabic", "ar" },
             { "bosnian", "bs" },
@@ -123,7 +122,7 @@
             { "thai", "th" },
             { "turkish", "tr" },
             { "ukrainian", "uk" }
-        };
+        };      
 
         #endregion
 
