@@ -1,4 +1,13 @@
-﻿using NewsScout.Services;
-// See https://aka.ms/new-console-template for more information
-WriteLine("Hello, World!");
-MenuService.ShowMainMenu();
+﻿#region Manual Test Area
+
+#region MenuService Tests
+
+char[] choices = { 'a', 'b', 'c' };
+string userInput = "1";
+
+char returnChar = MenuService.CheckUserSelection(userInput, choices);
+
+#endregion
+
+
+#endregion

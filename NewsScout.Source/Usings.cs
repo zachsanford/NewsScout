@@ -4,5 +4,5 @@ global using System.Collections.ObjectModel;
 global using System.Linq;
 global using System.Text;
 global using System.Threading.Tasks;
-global using static NewsScout.Services.ConfigurationService;
+global using NewsScout.Services;
 global using static System.Console;
