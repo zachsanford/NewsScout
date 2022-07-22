@@ -11,11 +11,41 @@ namespace NewsScout.Tests
         [DataRow("c", new char[] { 'a', 'b', 'c' })]
         public void TestCheckUserSelection_Correct(string _userInput, char[] _choicesToChooseFrom)
         {
-            // Arrange & Assert
+            // Arrange & Act
             char testOutput = MenuService.CheckUserSelection(_userInput, _choicesToChooseFrom);
 
             // Assert
             Assert.AreEqual(Convert.ToChar(_userInput), testOutput);
+        }
+
+        [TestMethod]
+        public void TestShowMenu_Correct()
+        {
+            // Arrange
+            ReadOnlyCollection<char> options = new List<char>
+            {
+                'a',
+                'b',
+                'c'
+            }.AsReadOnly();
+
+            ReadOnlyCollection<string> descriptions = new List<string>
+            {
+                "first",
+                "second",
+                "third"
+            }.AsReadOnly();
+
+            // Act
+            try
+            {
+                char testOutput = MenuService.ShowMenu(options, descriptions);
+            }
+            catch (Exception ex)
+            {
+                // Assert
+                Assert.IsTrue(ex.Message != null);
+            }
         }
     }
 }

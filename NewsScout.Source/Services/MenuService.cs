@@ -6,20 +6,27 @@
         #region Properties
 
         public static int MenuSelection { get; set; }
-        private static char[] MainMenu { get; set; } =
+        public static ReadOnlyCollection<char> MainMenuOptions { get; private set; } = new List<char>
         {
-            '0',
-            '1',
+            '0', // Get results with current settings
+            '1', // Get results with search query
             's', // Settings
             'q'  // Quit
-        };
+        }.AsReadOnly();
+        public static ReadOnlyCollection<string> MainMenuDescriptions { get; private set; } = new List<string>
+        {
+            "0) - Get News with the Current Settings -",
+            "1) - Create News Search -",
+            "s) - Access the Program Settings -",
+            "q) - Quit the Program -"
+        }.AsReadOnly();
 
         #endregion
 
         #region Methods
 
         // Main menu
-        private static void ShowMainMenu()
+        private static void ShowMainMenuHeader()
         {
             // Clear the console
             Clear();
@@ -81,7 +88,18 @@
         }
 
         // Generic display the Menu Options
-        // public
+        public static char ShowMenu(ReadOnlyCollection<char> _menuOptions, ReadOnlyCollection<string> _menuDescriptions)
+        {
+            ShowMainMenuHeader();
+
+            foreach (string _menuItemDescription in _menuDescriptions)
+            {
+                WriteLine(_menuItemDescription);
+            }
+
+            Write("\nPlease enter your selection >> ");
+            return CheckUserSelection(ReadLine(), _menuOptions.ToArray());
+        }
 
         #endregion
 
