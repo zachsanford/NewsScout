@@ -109,7 +109,7 @@
         }
 
         // Generic method for showing settings.json values when editing
-        private static void ShowEditValues(Enum _valueToSelect, string[] _newValues = null)
+        private static void ShowEditValues(Enum _valueToSelect, string[]? _newValues = null)
         {
             Settings _currentSettings = ConfigurationService.LoadSettings();
 
@@ -206,7 +206,7 @@
         }
 
         // Generic display the Menu Options
-        public static char ShowMenu(ReadOnlyCollection<char> _menuOptions, ReadOnlyCollection<string> _menuDescriptions, Enum _menuType, string[] _extraOptions = null)
+        public static char ShowMenu(ReadOnlyCollection<char> _menuOptions, ReadOnlyCollection<string> _menuDescriptions, Enum _menuType, string[]? _extraOptions = null)
         {
             ShowMainMenuHeader();
 
@@ -233,16 +233,31 @@
             return CheckUserSelection(ReadLine(), _menuOptions.ToArray());
         }
 
-        // Input parsing for settings
-        public static string[] ParseSettingsInput(string _userInput)
+        // Input parsing for settings, To Lower
+        public static string[] ParseSettingsInput(string _userInput, Enum _inputType)
         {
             // Split on comma (,)
             string[] _splitUserInput = _userInput.Split(',');
 
-            // Clear leading and trailing whitespace. To Lower
-            for (int i = 0; i < _splitUserInput.Length; i++)
+            switch (_inputType)
             {
-                _splitUserInput[i] = _splitUserInput[i].Trim().ToLower();
+                case SettingsKeys.ApiKey:
+                    // Clear leading and trailing whitespace.
+                    for (int i = 0; i < _splitUserInput.Length; i++)
+                    {
+                        _splitUserInput[i] = _splitUserInput[i].Trim();
+                    }
+                    break;
+
+                default:
+
+                    // Clear leading and trailing whitespace. To Lower
+                    for (int i = 0; i < _splitUserInput.Length; i++)
+                    {
+                        _splitUserInput[i] = _splitUserInput[i].Trim().ToLower();
+                    }
+
+                    break;
             }
 
             return _splitUserInput;

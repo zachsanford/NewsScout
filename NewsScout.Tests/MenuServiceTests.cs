@@ -26,7 +26,7 @@ namespace NewsScout.Tests
             string[] expectedOutput = { "australia", "belgium", "saudi arabia" };
 
             // Act
-            string[] testOutput = MenuService.ParseSettingsInput(_userInput);
+            string[] testOutput = MenuService.ParseSettingsInput(_userInput, MenuService.SettingsKeys.Country);
 
             // Assert
             for (int i = 0; i < testOutput.Length; i++)
@@ -43,10 +43,24 @@ namespace NewsScout.Tests
             int expectedCount = 2;
 
             // Act
-            string[] testOutput = MenuService.ParseSettingsInput(_userInput);
+            string[] testOutput = MenuService.ParseSettingsInput(_userInput, MenuService.SettingsKeys.Country);
 
             // Assert
             Assert.AreEqual(expectedCount, testOutput.Length);
+        }
+
+        [DataTestMethod]
+        [DataRow("  newAPiKey    ")]
+        public void TestParseSettingsInput_CorrectAPIKey(string _userInput)
+        {
+            // Arrange
+            string expectedOutput = "newAPiKey";
+
+            // Act
+            string[] testOutput = MenuService.ParseSettingsInput(_userInput, MenuService.SettingsKeys.ApiKey);
+
+            // Assert
+            Assert.AreEqual(expectedOutput, testOutput.FirstOrDefault());
         }
 
         [TestMethod]
