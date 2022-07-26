@@ -18,6 +18,37 @@ namespace NewsScout.Tests
             Assert.AreEqual(Convert.ToChar(_userInput.ToLower()), testOutput);
         }
 
+        [DataTestMethod]
+        [DataRow(" australia,belgium,Saudi Arabia  ")]
+        public void TestParseSettingsInput_Correct(string _userInput)
+        {
+            // Arrange
+            string[] expectedOutput = { "australia", "belgium", "saudi arabia" };
+
+            // Act
+            string[] testOutput = MenuService.ParseSettingsInput(_userInput);
+
+            // Assert
+            for (int i = 0; i < testOutput.Length; i++)
+            {
+                Assert.AreEqual(expectedOutput[i], testOutput[i]);
+            }
+        }
+
+        [DataTestMethod]
+        [DataRow("  Saudi arAbia,   united states OF america         ")]
+        public void TestParseSettingsInput_CorrectCount(string _userInput)
+        {
+            // Arrange
+            int expectedCount = 2;
+
+            // Act
+            string[] testOutput = MenuService.ParseSettingsInput(_userInput);
+
+            // Assert
+            Assert.AreEqual(expectedCount, testOutput.Length);
+        }
+
         [TestMethod]
         public void TestShowMenu_Correct()
         {

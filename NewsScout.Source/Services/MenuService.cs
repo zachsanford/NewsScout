@@ -109,7 +109,7 @@
         }
 
         // Generic method for showing settings.json values when editing
-        private static void ShowEditValues(Enum _valueToSelect, string _newValue = null)
+        private static void ShowEditValues(Enum _valueToSelect, string[] _newValues = null)
         {
             Settings _currentSettings = ConfigurationService.LoadSettings();
 
@@ -118,10 +118,10 @@
                 case SettingsKeys.ApiKey:
                     WriteLine("     API Key:");
                     WriteLine($"          {_currentSettings.ApiKey}");
-                    if (_newValue != null)
+                    if (_newValues != null && _newValues.Length <= 1)
                     {
                         WriteLine("\n     New API Key:");
-                        WriteLine($"          {_newValue}");
+                        WriteLine($"          {_newValues[0]}");
                     }
                     break;
 
@@ -134,6 +134,14 @@
                             WriteLine($"          {OptionsService.Country.FirstOrDefault(v => v.Value == _country).Key}");
                         }
                     }
+                    if (_newValues != null && _newValues.Length <= 5)
+                    {
+                        WriteLine("\n     New Countries:");
+                        foreach (string _newCountry in _newValues)
+                        {
+                            WriteLine($"          {_newCountry}");
+                        }
+                    }
                     break;
 
                 case SettingsKeys.Language:
@@ -143,6 +151,14 @@
                         foreach (string _language in _currentSettings.Language)
                         {
                             WriteLine($"          {OptionsService.Language.FirstOrDefault(v => v.Value == _language).Key}");
+                        }
+                    }
+                    if (_newValues != null && _newValues.Length <= 5)
+                    {
+                        WriteLine("\n     New Languages:");
+                        foreach (string _newLanguage in _newValues)
+                        {
+                            WriteLine($"          {_newLanguage}");
                         }
                     }
                     break;
@@ -215,6 +231,21 @@
 
             Write("\nPlease enter your selection >> ");
             return CheckUserSelection(ReadLine(), _menuOptions.ToArray());
+        }
+
+        // Input parsing for settings
+        public static string[] ParseSettingsInput(string _userInput)
+        {
+            // Split on comma (,)
+            string[] _splitUserInput = _userInput.Split(',');
+
+            // Clear leading and trailing whitespace. To Lower
+            for (int i = 0; i < _splitUserInput.Length; i++)
+            {
+                _splitUserInput[i] = _splitUserInput[i].Trim().ToLower();
+            }
+
+            return _splitUserInput;
         }
 
         // Quit the program
