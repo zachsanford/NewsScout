@@ -47,5 +47,37 @@ namespace NewsScout.Tests
             Assert.AreEqual(testSettings2.Country[0], testSettings1.Country[0]);
             Assert.AreEqual(testSettings2.Language[0], testSettings1.Language[0]);
         }
+
+        [DataTestMethod]
+        [DataRow(new string[] { "united states of america", "canada", "japan" }, MenuService.SettingsKeys.Country)]
+        public void TestConvertToTwoLetter_CorrectCountry(string[] _input, Enum _type)
+        {
+            // Arrange
+            string[] expectedOutput = { "us", "ca", "jp" };
+
+            // Act
+            string[] testOutput = ConfigurationService.ConvertToTwoLetter(_input, _type);
+
+            // Assert
+            Assert.AreEqual(expectedOutput[0], testOutput[0]);
+            Assert.AreEqual(expectedOutput[1], testOutput[1]);
+            Assert.AreEqual(expectedOutput[2], testOutput[2]);
+        }
+
+        [DataTestMethod]
+        [DataRow(new string[] { "english", "french", "german" }, MenuService.SettingsKeys.Language)]
+        public void TestConvertToTwoLetter_CorrectLanguage(string[] _input, Enum _type)
+        {
+            // Arrange
+            string[] expectedOutput = { "en", "fr", "de" };
+
+            // Act
+            string[] testOutput = ConfigurationService.ConvertToTwoLetter(_input, _type);
+
+            // Assert
+            Assert.AreEqual(expectedOutput[0], testOutput[0]);
+            Assert.AreEqual(expectedOutput[1], testOutput[1]);
+            Assert.AreEqual(expectedOutput[2], testOutput[2]);
+        }
     }
 }

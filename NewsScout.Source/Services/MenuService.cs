@@ -7,7 +7,7 @@
 
         public static char MenuSelection { get; set; }
         public enum SettingsKeys { ApiKey, Country, Language }
-        public enum MenuType { Main, Settings, ApiSettings }
+        public enum MenuType { Main, Settings, ApiSettings, CountrySettings, LanguageSettings }
         public static ReadOnlyCollection<char> MainMenuOptions { get; private set; } = new List<char>
         {
             '0', // Get results with current settings
@@ -36,14 +36,14 @@
             "2) - Change Languages - (Can have up to five!)",
             "b) - Back to Main Menu -"
         }.AsReadOnly();
-        public static ReadOnlyCollection<char> APIKeyMenuOptions { get; private set; } = new List<char>
+        public static ReadOnlyCollection<char> SettingsEditMenuOptions { get; private set; } = new List<char>
         {
             '0', // Enter New Value
             '1', // Save Changes
             'b'  // Discard Changes and go back
 
         }.AsReadOnly();
-        public static ReadOnlyCollection<string> APIKeyMenuDescriptions { get; private set; } = new List<string>
+        public static ReadOnlyCollection<string> SettingsEditMenuDescriptions { get; private set; } = new List<string>
         {
             "0) - Enter New Value -",
             "1) - Save Changes -",
@@ -145,7 +145,7 @@
                     break;
 
                 case SettingsKeys.Language:
-                    WriteLine("+     Languages:");
+                    WriteLine("     Languages:");
                     if (_currentSettings.Language != null)
                     {
                         foreach (string _language in _currentSettings.Language)
@@ -218,6 +218,14 @@
 
                 case MenuType.ApiSettings:
                     ShowEditValues(SettingsKeys.ApiKey, _extraOptions);
+                    break;
+
+                case MenuType.CountrySettings:
+                    ShowEditValues(SettingsKeys.Country, _extraOptions);
+                    break;
+
+                case MenuType.LanguageSettings:
+                    ShowEditValues(SettingsKeys.Language, _extraOptions);
                     break;
 
                 default:

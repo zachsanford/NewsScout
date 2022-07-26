@@ -1,9 +1,11 @@
 {
-  "ApiKey": "NEwVAlue",
+  "ApiKey": "YOUR_API_KEY_HERE",
   "Country": [
     "us"
   ],
   "Language": [
-    "en"
+    "en",
+    "fr",
+    "de"
   ]
 }

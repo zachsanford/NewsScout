@@ -43,6 +43,34 @@ namespace NewsScout.Services
             }
         }
 
+        // Convert country to two-letter code
+        public static string[] ConvertToTwoLetter(string[] _input, Enum _type)
+        {
+            List<string> _twoLetterList = new List<string>();
+
+            switch (_type)
+            {
+                case MenuService.SettingsKeys.Country:
+                    foreach (string _country in _input)
+                    {
+                        _twoLetterList.Add(OptionsService.Country[_country]);
+                    }
+                    break;
+
+                case MenuService.SettingsKeys.Language:
+                    foreach (string _language in _input)
+                    {
+                        _twoLetterList.Add(OptionsService.Language[_language]);
+                    }
+                    break;
+
+                default:
+                    break;
+            }
+
+            return _twoLetterList.ToArray();
+        }
+
         #endregion
 
     }
