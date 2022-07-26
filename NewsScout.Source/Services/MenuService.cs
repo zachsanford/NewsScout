@@ -6,6 +6,8 @@
         #region Properties
 
         public static char MenuSelection { get; set; }
+        public enum SettingsKeys { ApiKey, Country, Language }
+        public enum MenuType { Main, Settings, ApiSettings }
         public static ReadOnlyCollection<char> MainMenuOptions { get; private set; } = new List<char>
         {
             '0', // Get results with current settings
@@ -107,9 +109,50 @@
         }
 
         // Generic method for showing settings.json values when editing
-        private static void ShowEditValues()
+        private static void ShowEditValues(Enum _valueToSelect, string _newValue = null)
         {
+            Settings _currentSettings = ConfigurationService.LoadSettings();
 
+            switch (_valueToSelect)
+            {
+                case SettingsKeys.ApiKey:
+                    WriteLine("     API Key:");
+                    WriteLine($"          {_currentSettings.ApiKey}");
+                    if (_newValue != null)
+                    {
+                        WriteLine("\n     New API Key:");
+                        WriteLine($"          {_newValue}");
+                    }
+                    break;
+
+                case SettingsKeys.Country:
+                    WriteLine("     Countries:");
+                    if (_currentSettings.Country != null)
+                    {
+                        foreach (string _country in _currentSettings.Country)
+                        {
+                            WriteLine($"          {OptionsService.Country.FirstOrDefault(v => v.Value == _country).Key}");
+                        }
+                    }
+                    break;
+
+                case SettingsKeys.Language:
+                    WriteLine("+     Languages:");
+                    if (_currentSettings.Language != null)
+                    {
+                        foreach (string _language in _currentSettings.Language)
+                        {
+                            WriteLine($"          {OptionsService.Language.FirstOrDefault(v => v.Value == _language).Key}");
+                        }
+                    }
+                    break;
+
+                default:
+                    break;
+            }
+
+            WriteLine();
+            WriteLine("###########################################################\n");
         }
         
         // Generic method for error checking the users input
@@ -147,13 +190,22 @@
         }
 
         // Generic display the Menu Options
-        public static char ShowMenu(ReadOnlyCollection<char> _menuOptions, ReadOnlyCollection<string> _menuDescriptions, bool _showSettings = false)
+        public static char ShowMenu(ReadOnlyCollection<char> _menuOptions, ReadOnlyCollection<string> _menuDescriptions, Enum _menuType)
         {
             ShowMainMenuHeader();
 
-            if (_showSettings)
+            switch (_menuType)
             {
-                ShowCurrentSettings();
+                case MenuType.Settings:
+                    ShowCurrentSettings();
+                    break;
+
+                case MenuType.ApiSettings:
+                    ShowEditValues(SettingsKeys.ApiKey);
+                    break;
+
+                default:
+                    break;
             }
 
             foreach (string _menuItemDescription in _menuDescriptions)

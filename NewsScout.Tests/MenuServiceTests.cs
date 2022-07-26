@@ -39,7 +39,7 @@ namespace NewsScout.Tests
             // Act
             try
             {
-                char testOutput = MenuService.ShowMenu(options, descriptions);
+                char testOutput = MenuService.ShowMenu(options, descriptions, MenuService.MenuType.Main);
             }
             catch (Exception ex)
             {

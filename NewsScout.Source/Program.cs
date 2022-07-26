@@ -8,7 +8,7 @@
 //char returnChar = MenuService.CheckUserSelection(userInput, choices);
 
 WriteLine(MenuService.MenuSelection);
-MenuService.MenuSelection = MenuService.ShowMenu(MenuService.MainMenuOptions, MenuService.MainMenuDescriptions);
+MenuService.MenuSelection = MenuService.ShowMenu(MenuService.MainMenuOptions, MenuService.MainMenuDescriptions, MenuService.MenuType.Main);
 bool isLooping = true;
 
 while (isLooping)
@@ -22,11 +22,12 @@ while (isLooping)
             break;
 
         case 's':
-            MenuService.MenuSelection = MenuService.ShowMenu(MenuService.SettingsMenuOptions, MenuService.SettingsMenuDescriptions, true);
+            MenuService.MenuSelection = MenuService.ShowMenu(MenuService.SettingsMenuOptions, MenuService.SettingsMenuDescriptions, MenuService.MenuType.Settings);
 
             switch (MenuService.MenuSelection)
             {
                 case '0':
+                    MenuService.MenuSelection = MenuService.ShowMenu(MenuService.APIKeyMenuOptions, MenuService.APIKeyMenuDescriptions, MenuService.MenuType.ApiSettings);
                     break;
 
                 case '1':
@@ -36,7 +37,7 @@ while (isLooping)
                     break;
 
                 case 'b':
-                    MenuService.MenuSelection = MenuService.ShowMenu(MenuService.MainMenuOptions, MenuService.MainMenuDescriptions);
+                    MenuService.MenuSelection = MenuService.ShowMenu(MenuService.MainMenuOptions, MenuService.MainMenuDescriptions, MenuService.MenuType.Main);
                     break;
 
                 default:
