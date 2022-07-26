@@ -206,7 +206,7 @@
         }
 
         // Generic display the Menu Options
-        public static char ShowMenu(ReadOnlyCollection<char> _menuOptions, ReadOnlyCollection<string> _menuDescriptions, Enum _menuType)
+        public static char ShowMenu(ReadOnlyCollection<char> _menuOptions, ReadOnlyCollection<string> _menuDescriptions, Enum _menuType, string[] _extraOptions = null)
         {
             ShowMainMenuHeader();
 
@@ -217,7 +217,7 @@
                     break;
 
                 case MenuType.ApiSettings:
-                    ShowEditValues(SettingsKeys.ApiKey);
+                    ShowEditValues(SettingsKeys.ApiKey, _extraOptions);
                     break;
 
                 default:

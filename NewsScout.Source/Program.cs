@@ -10,6 +10,7 @@
 WriteLine(MenuService.MenuSelection);
 MenuService.MenuSelection = MenuService.ShowMenu(MenuService.MainMenuOptions, MenuService.MainMenuDescriptions, MenuService.MenuType.Main);
 bool isLooping = true;
+bool isLoopingSubMenu = true;
 
 while (isLooping)
 {
@@ -22,33 +23,46 @@ while (isLooping)
             break;
 
         case 's':
+            isLoopingSubMenu = true;
             MenuService.MenuSelection = MenuService.ShowMenu(MenuService.SettingsMenuOptions, MenuService.SettingsMenuDescriptions, MenuService.MenuType.Settings);
 
-            switch (MenuService.MenuSelection)
+            while (isLoopingSubMenu)
             {
-                case '0':
-                    MenuService.MenuSelection = MenuService.ShowMenu(MenuService.APIKeyMenuOptions, MenuService.APIKeyMenuDescriptions, MenuService.MenuType.ApiSettings);
-                    break;
+                string[]? newSettings;
+                
+                switch (MenuService.MenuSelection)
+                {
+                    case '0':
+                        MenuService.MenuSelection = MenuService.ShowMenu(MenuService.APIKeyMenuOptions, MenuService.APIKeyMenuDescriptions, MenuService.MenuType.ApiSettings);
+                        if (MenuService.MenuSelection == '0')
+                        {
+                            Write("\nNew API Key Value >> ");
+                            newSettings = MenuService.ParseSettingsInput(ReadLine());
+                            MenuService.MenuSelection = MenuService.ShowMenu(MenuService.APIKeyMenuOptions, MenuService.APIKeyMenuDescriptions, MenuService.MenuType.ApiSettings, newSettings);
+                        }
+                        break;
 
-                case '1':
-                    break;
+                    case '1':
+                        break;
 
-                case '2':
-                    break;
+                    case '2':
+                        break;
 
-                case 'b':
-                    MenuService.MenuSelection = MenuService.ShowMenu(MenuService.MainMenuOptions, MenuService.MainMenuDescriptions, MenuService.MenuType.Main);
-                    break;
+                    case 'b':
+                        isLoopingSubMenu = false;
+                        MenuService.MenuSelection = MenuService.ShowMenu(MenuService.MainMenuOptions, MenuService.MainMenuDescriptions, MenuService.MenuType.Main);
+                        break;
 
-                default:
-                    break;
+                    default:
+                        break;
+                }
             }
 
             break;
 
         case 'q':
-            MenuService.UserQuitTheProgram();
             isLooping = false;
+            MenuService.UserQuitTheProgram();
             break;
 
         default:
