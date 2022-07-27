@@ -49,6 +49,20 @@
             "1) - Save Changes -",
             "b) - Discard Changes and Go Back -"
         }.AsReadOnly();
+        public static ReadOnlyCollection<char> ArticleListOptions { get; private set; } = new List<char>
+        {
+            '0',
+            '1',
+            '2',
+            '3',
+            '4',
+            '5',
+            '6',
+            '7',
+            '8',
+            '9',
+            'b'  // Go back
+        }.AsReadOnly();
 
         #endregion
 
@@ -270,6 +284,26 @@
 
             return _splitUserInput;
         }
+
+        // Show list of articles
+        public static char ListArticles(ApiResponse _articles, ReadOnlyCollection<char> _menuOptions)
+        {
+            ShowMainMenuHeader();
+
+            for (int i = 0; i < 10; i++)
+            {
+                WriteLine($"{i}) - {_articles.Results[i].Title}");
+                WriteLine($"{_articles.Results[i].Description}");
+                WriteLine();
+            }
+
+            WriteLine("b) - Go back -");
+            Write("\nPlease enter your selection >> ");
+            return CheckUserSelection(ReadLine(), _menuOptions.ToArray());
+        }
+
+        // Show specific article
+
 
         // Quit the program
         public static void UserQuitTheProgram()

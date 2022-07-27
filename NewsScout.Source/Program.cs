@@ -19,12 +19,26 @@ while (isLooping)
     switch (MenuService.MenuSelection)
     {
         case '0':
+            // Get results with current settings
+            isLooping = true;
+            Write("Gathering Articles...");
+            ApiResponse response = await ApiService.GetNewsWithSettings();
+            MenuService.MenuSelection = MenuService.ListArticles(response, MenuService.ArticleListOptions);
+
+            while (isLoopingSubMenu)
+            {
+
+            }
+
             break;
 
         case '1':
+            // Get results with search query
+
             break;
 
         case 's':
+            // Settings
             isLoopingSubMenu = true;
             MenuService.MenuSelection = MenuService.ShowMenu(MenuService.SettingsMenuOptions, MenuService.SettingsMenuDescriptions, MenuService.MenuType.Settings);
 
