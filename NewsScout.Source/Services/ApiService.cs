@@ -41,8 +41,9 @@ namespace NewsScout.Services
                 _query.Append("&country=");
                 foreach (string _countryCode in _settings.Country)
                 {
-                    _query.Append(_countryCode);
+                    _query.Append(_countryCode + ',');
                 }
+                _query.Length--;
             }
 
             if (_settings.Language != null)
@@ -50,8 +51,9 @@ namespace NewsScout.Services
                 _query.Append("&language=");
                 foreach (string _languageCode in _settings.Language)
                 {
-                    _query.Append(_languageCode);
+                    _query.Append(_languageCode + ',');
                 }
+                _query.Length--;
             }
 
             using (HttpClient _client = new HttpClient())

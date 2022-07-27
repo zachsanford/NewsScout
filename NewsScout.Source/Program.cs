@@ -9,6 +9,7 @@
 
 WriteLine(MenuService.MenuSelection);
 MenuService.MenuSelection = MenuService.ShowMenu(MenuService.MainMenuOptions, MenuService.MainMenuDescriptions, MenuService.MenuType.Main);
+ApiResponse? response = null;
 string[]? newSettings = null;
 bool isLooping = true;
 bool isLoopingSubMenu = true;
@@ -21,19 +22,45 @@ while (isLooping)
         case '0':
             // Get results with current settings
             isLooping = true;
-            Write("Gathering Articles...");
-            ApiResponse response = await ApiService.GetNewsWithSettings();
-            MenuService.MenuSelection = MenuService.ListArticles(response, MenuService.ArticleListOptions);
+            isLoopingSubMenu = true;
+            
+            if (response == null)
+            {
+                Write("Gathering Articles...");
+                response = await ApiService.GetNewsWithSettings();
+            }        
 
             while (isLoopingSubMenu)
             {
-
+                MenuService.MenuSelection = MenuService.ListArticles(response, MenuService.ArticleListOptions);
+                if (MenuService.ArticleListOptions.Contains(MenuService.MenuSelection))
+                {
+                    if (MenuService.MenuSelection != 'b')
+                    {
+                        MenuService.ShowArticle(response.Results[Convert.ToInt16(MenuService.MenuSelection.ToString())]);
+                        // isLoopingSubMenu = false;
+                        // Might need to break here
+                    }
+                    else
+                    {
+                        isLoopingSubMenu = false;
+                        MenuService.MenuSelection = MenuService.ShowMenu(MenuService.MainMenuOptions, MenuService.MainMenuDescriptions, MenuService.MenuType.Main);
+                        // Might need to break here
+                    }
+                }
+                else
+                {
+                    Write($"{MenuService.MenuSelection} is not a correct choice! Please try again >> ");
+                    MenuService.MenuSelection = MenuService.ListArticles(response, MenuService.ArticleListOptions);
+                }
             }
 
             break;
 
         case '1':
             // Get results with search query
+            isLooping = true;
+            isLoopingSubMenu = true;
 
             break;
 

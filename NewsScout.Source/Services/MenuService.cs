@@ -292,8 +292,23 @@
 
             for (int i = 0; i < 10; i++)
             {
-                WriteLine($"{i}) - {_articles.Results[i].Title}");
-                WriteLine($"{_articles.Results[i].Description}");
+                if (!string.IsNullOrEmpty(_articles.Results[i].Title))
+                {
+                    WriteLine($"{i}) - {_articles.Results[i].Title}");
+                }
+                else
+                {
+                    WriteLine($"{i}) - NO TITLE");
+                }
+
+                if (!string.IsNullOrEmpty(_articles.Results[i].Description))
+                {
+                    WriteLine($"{_articles.Results[i].Description}");
+                }
+                else
+                {
+                    WriteLine("NO DESCRIPTION");
+                }
                 WriteLine();
             }
 
@@ -303,7 +318,57 @@
         }
 
         // Show specific article
+        public static void ShowArticle(Result _individualResult)
+        {
+            ShowMainMenuHeader();
 
+            if (!string.IsNullOrEmpty(_individualResult.Title))
+            {
+                WriteLine("TITLE:");
+                WriteLine($"\n{_individualResult.Title}");
+            }
+            else
+            {
+                WriteLine("TITLE:");
+                WriteLine($"\nNOT AVAILABLE");
+            }
+
+            if (!string.IsNullOrEmpty(_individualResult.Description))
+            {
+                WriteLine("\nDESCRIPTION:");
+                WriteLine($"\n{_individualResult.Description}");
+            }
+            else
+            {
+                WriteLine("\nDESCRIPTION:");
+                WriteLine($"\nNOT AVAILABLE");
+            }
+
+            if (!string.IsNullOrEmpty(_individualResult.Content))
+            {
+                WriteLine("\nCONTENT:");
+                WriteLine($"\n{_individualResult.Content}");
+            }
+            else
+            {
+                WriteLine("\nCONTENT:");
+                WriteLine($"\nNOT AVAILABLE");
+            }
+
+            if (!string.IsNullOrEmpty(_individualResult.Link))
+            {
+                WriteLine("\nLINK TO ARTICLE:");
+                WriteLine($"\n{_individualResult.Link}");
+            }
+            else
+            {
+                WriteLine("\nLINK TO ARTICLE:");
+                WriteLine($"\nNOT AVAILABLE");
+            }
+
+            Write("\nPress any key to go back to the list...");
+            ReadLine();
+        }
 
         // Quit the program
         public static void UserQuitTheProgram()
