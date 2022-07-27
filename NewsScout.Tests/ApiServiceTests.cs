@@ -15,5 +15,15 @@ namespace NewsScout.Tests
             // Assert
             Assert.IsNotNull(testResponse);
         }
+
+        [TestMethod]
+        public async Task TestGetNewsWithSettings_Correct()
+        {
+            // Arrange & Act
+            ApiResponse testResponse = await ApiService.GetNewsWithSettings();
+
+            // Assert
+            Assert.IsNotNull(testResponse);
+        }
     }
 }
