@@ -71,6 +71,44 @@ namespace NewsScout.Services
             return _twoLetterList.ToArray();
         }
 
+        // Check input against dictionaries // Error Checking
+        public static bool CheckAgainstDictionary(string[] _input, Enum _type)
+        {
+            bool _isInDictionary = true;
+
+            switch (_type)
+            {
+                case MenuService.SettingsKeys.Country:
+                    foreach (string _country in _input)
+                    {
+                        if (!OptionsService.Country.Any(x => x.Key == _country))
+                        {
+                            _isInDictionary = false;
+                            Write($"\n{_country} is not an option. Press any key to continue...");
+                            break;
+                        }
+                    }
+                    break;
+
+                case MenuService.SettingsKeys.Language:
+                    foreach (string _language in _input)
+                    {
+                        if (!OptionsService.Language.Any(x => x.Key == _language))
+                        {
+                            _isInDictionary = false;
+                            Write($"\n{_language} is not an option. Press any key to continue...");
+                            break;
+                        }
+                    }
+                    break;
+
+                default:
+                    break;
+            }
+
+            return _isInDictionary;
+        }
+
         #endregion
 
     }

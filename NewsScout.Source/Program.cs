@@ -96,12 +96,17 @@ while (isLooping)
                                 case '0':
                                     // Enter new Country value
                                     Write("\nNew Country Values (comma separated/up to five) >> ");
-                                    newSettings = MenuService.ParseSettingsInput(ReadLine(), MenuService.SettingsKeys.ApiKey);
+                                    newSettings = MenuService.ParseSettingsInput(ReadLine(), MenuService.SettingsKeys.Country);
 
                                     // More than five
                                     if (newSettings.Length > 5)
                                     {
                                         Write("\nThere are more than five countries! Press any key to continue...");
+                                        ReadLine();
+                                        break;
+                                    }
+                                    else if (!ConfigurationService.CheckAgainstDictionary(newSettings, MenuService.SettingsKeys.Country))
+                                    {
                                         ReadLine();
                                         break;
                                     }
@@ -160,12 +165,17 @@ while (isLooping)
                                 case '0':
                                     // Enter new Language value
                                     Write("\nNew Language Values (comma separated/up to five) >> ");
-                                    newSettings = MenuService.ParseSettingsInput(ReadLine(), MenuService.SettingsKeys.ApiKey);
+                                    newSettings = MenuService.ParseSettingsInput(ReadLine(), MenuService.SettingsKeys.Language);
 
                                     // More than five
                                     if (newSettings.Length > 5)
                                     {
                                         Write("\nThere are more than five languages! Press any key to continue...");
+                                        ReadLine();
+                                        break;
+                                    }
+                                    else if (!ConfigurationService.CheckAgainstDictionary(newSettings, MenuService.SettingsKeys.Language))
+                                    {
                                         ReadLine();
                                         break;
                                     }

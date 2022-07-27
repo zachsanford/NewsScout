@@ -79,5 +79,29 @@ namespace NewsScout.Tests
             Assert.AreEqual(expectedOutput[1], testOutput[1]);
             Assert.AreEqual(expectedOutput[2], testOutput[2]);
         }
+
+        [DataTestMethod]
+        [DataRow(new string[] { "united states of america", "france", "canada" }, MenuService.SettingsKeys.Country)]
+        [DataRow(new string[] { "arabic", "bulgarian", "central kurdish" }, MenuService.SettingsKeys.Language)]
+        public void TestCheckAgainstDictionary_Correct(string[] _input, Enum _type)
+        {
+            // Arrange & Act
+            bool testOutput = ConfigurationService.CheckAgainstDictionary(_input, _type);
+
+            // Assert
+            Assert.IsTrue(testOutput);
+        }
+
+        [DataTestMethod]
+        [DataRow(new string[] { "united states of america", "fail", "canada" }, MenuService.SettingsKeys.Country)]
+        [DataRow(new string[] { "arabic", "bulgarian", "does not work" }, MenuService.SettingsKeys.Language)]
+        public void TestCheckAgainstDictionary_Incorrect(string[] _input, Enum _type)
+        {
+            // Arrange & Act
+            bool testOutput = ConfigurationService.CheckAgainstDictionary(_input, _type);
+
+            // Assert
+            Assert.IsFalse(testOutput);
+        }
     }
 }
