@@ -17,10 +17,21 @@ namespace NewsScout.Tests
         }
 
         [TestMethod]
-        public async Task TestGetNewsWithSettings_Correct()
+        public async Task TestGetNewsWithSettings_CorrectNoSearch()
         {
             // Arrange & Act
-            ApiResponse testResponse = await ApiService.GetNewsWithSettings();
+            ApiResponse testResponse = await ApiService.GetNewsWithSettingsAndSearch();
+
+            // Assert
+            Assert.IsNotNull(testResponse);
+        }
+
+        [DataTestMethod]
+        [DataRow("Oregon")]
+        public async Task TestGetNewsWithSettings_CorrectSearch(string searchString)
+        {
+            // Arrange & Act
+            ApiResponse testResponse = await ApiService.GetNewsWithSettingsAndSearch(searchString);
 
             // Assert
             Assert.IsNotNull(testResponse);

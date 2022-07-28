@@ -35,8 +35,8 @@ namespace NewsScout.Services
             }
         }
 
-        // Request with Country and Language
-        public static async Task<ApiResponse> GetNewsWithSettings()
+        // Request with Country and Language / Optional Search
+        public static async Task<ApiResponse> GetNewsWithSettingsAndSearch(string? _searchString = null)
         {
             Settings _settings = ConfigurationService.LoadSettings();
             ApiResponse? _returnResponse = new ApiResponse();
@@ -60,6 +60,11 @@ namespace NewsScout.Services
                     _query.Append(_languageCode + ',');
                 }
                 _query.Length--;
+            }
+
+            if (_searchString != null)
+            {
+                _query.Append("&q=" + _searchString);
             }
 
             using (HttpClient _client = new HttpClient())
