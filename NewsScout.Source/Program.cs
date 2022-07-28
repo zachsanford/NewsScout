@@ -57,12 +57,15 @@ while (isLooping)
                     }
                 }
             }
-            else if (response.Results.Length == 0)
+            else if (response.Results != null)
             {
-                Write("\n\nNO RESULTS. Press any key to continue...");
-                ReadLine();
-                MenuService.MenuSelection = MenuService.ShowMenu(MenuService.MainMenuOptions, MenuService.MainMenuDescriptions, MenuService.MenuType.Main);
-                break;
+                if (response.Results.Length == 0)
+                {
+                    Write("\n\nNO RESULTS. Press any key to continue...");
+                    ReadLine();
+                    MenuService.MenuSelection = MenuService.ShowMenu(MenuService.MainMenuOptions, MenuService.MainMenuDescriptions, MenuService.MenuType.Main);
+                    break;
+                }                
             }
             else
             {
@@ -128,13 +131,16 @@ while (isLooping)
                                 }
                             }
                         }
-                        else if (response.Results.Length == 0)
+                        else if (response.Results != null)
                         {
-                            Write("\n\nNO RESULTS. Press any key to continue...");
-                            ReadLine();
-                            isLoopingSubMenu = false;
-                            MenuService.MenuSelection = MenuService.ShowMenu(MenuService.MainMenuOptions, MenuService.MainMenuDescriptions, MenuService.MenuType.Main);
-                            break;
+                            if (response.Results.Length == 0)
+                            {
+                                Write("\n\nNO RESULTS. Press any key to continue...");
+                                ReadLine();
+                                isLoopingSubMenu = false;
+                                MenuService.MenuSelection = MenuService.ShowMenu(MenuService.MainMenuOptions, MenuService.MainMenuDescriptions, MenuService.MenuType.Main);
+                                break;
+                            }
                         }
                         else
                         {
@@ -197,7 +203,7 @@ while (isLooping)
                                         Settings settings = ConfigurationService.LoadSettings();
                                         settings.ApiKey = newSettings.FirstOrDefault();
                                         ConfigurationService.SaveSettings(settings);
-                                        Write("COMPLETE. Press any key to continue...");
+                                        Write("\nCOMPLETE. Press any key to continue...");
                                         ReadLine();
                                         newSettings = null;
                                         isLoopingEditSetting = false;
