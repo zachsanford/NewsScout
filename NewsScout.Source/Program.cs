@@ -264,7 +264,7 @@ while (isLooping)
                                         Settings settings = ConfigurationService.LoadSettings();
                                         settings.Country = ConfigurationService.ConvertToTwoLetter(newSettings, MenuService.SettingsKeys.Country);
                                         ConfigurationService.SaveSettings(settings);
-                                        Write("COMPLETE. Press any key to continue...");
+                                        Write("\nCOMPLETE. Press any key to continue...");
                                         ReadLine();
                                         newSettings = null;
                                         isLoopingEditSetting = false;
@@ -332,7 +332,7 @@ while (isLooping)
                                         Settings settings = ConfigurationService.LoadSettings();
                                         settings.Language = ConfigurationService.ConvertToTwoLetter(newSettings, MenuService.SettingsKeys.Language);
                                         ConfigurationService.SaveSettings(settings);
-                                        Write("COMPLETE. Press any key to continue...");
+                                        Write("\nCOMPLETE. Press any key to continue...");
                                         ReadLine();
                                         newSettings = null;
                                         isLoopingEditSetting = false;
