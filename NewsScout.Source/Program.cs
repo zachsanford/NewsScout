@@ -39,15 +39,12 @@ while (isLooping)
                         if (MenuService.MenuSelection != 'b')
                         {
                             MenuService.ShowArticle(response.Results[Convert.ToInt16(MenuService.MenuSelection.ToString())]);
-                            // isLoopingSubMenu = false;
-                            // Might need to break here
                         }
                         else
                         {
                             isLoopingSubMenu = false;
                             MenuService.MenuSelection = MenuService.ShowMenu(MenuService.MainMenuOptions, MenuService.MainMenuDescriptions, MenuService.MenuType.Main);
                             response = new ApiResponse();
-                            // Might need to break here
                         }
                     }
                     else
@@ -57,12 +54,15 @@ while (isLooping)
                     }
                 }
             }
-            else if (response.Results.Length == 0)
+            else if (response.Results != null)
             {
-                Write("\n\nNO RESULTS. Press any key to continue...");
-                ReadLine();
-                MenuService.MenuSelection = MenuService.ShowMenu(MenuService.MainMenuOptions, MenuService.MainMenuDescriptions, MenuService.MenuType.Main);
-                break;
+                if (response.Results.Length == 0)
+                {
+                    Write("\n\nNO RESULTS. Press any key to continue...");
+                    ReadLine();
+                    MenuService.MenuSelection = MenuService.ShowMenu(MenuService.MainMenuOptions, MenuService.MainMenuDescriptions, MenuService.MenuType.Main);
+                    break;
+                }                
             }
             else
             {
@@ -86,7 +86,6 @@ while (isLooping)
                         // Create/Edit Query
                         Write("\nEnter your search query >> ");
                         searchQuery = ReadLine();
-                        // isLoopingSubMenu = false;
                         MenuService.MenuSelection = MenuService.ShowMenu(MenuService.SearchQueryMenuOptions, MenuService.SearchQueryMenuDescriptions, MenuService.MenuType.CustomSearch, null, searchQuery);
                         break;
 
@@ -110,15 +109,12 @@ while (isLooping)
                                     if (MenuService.MenuSelection != 'b')
                                     {
                                         MenuService.ShowArticle(response.Results[Convert.ToInt16(MenuService.MenuSelection.ToString())]);
-                                        // isLoopingSubMenu = false;
-                                        // Might need to break here
                                     }
                                     else
                                     {
                                         isLoopingSubMenu2 = false;
                                         MenuService.MenuSelection = MenuService.ShowMenu(MenuService.SearchQueryMenuOptions, MenuService.SearchQueryMenuDescriptions, MenuService.MenuType.CustomSearch, null, searchQuery);
                                         response = new ApiResponse();
-                                        // Might need to break here
                                     }
                                 }
                                 else
@@ -128,13 +124,16 @@ while (isLooping)
                                 }
                             }
                         }
-                        else if (response.Results.Length == 0)
+                        else if (response.Results != null)
                         {
-                            Write("\n\nNO RESULTS. Press any key to continue...");
-                            ReadLine();
-                            isLoopingSubMenu = false;
-                            MenuService.MenuSelection = MenuService.ShowMenu(MenuService.MainMenuOptions, MenuService.MainMenuDescriptions, MenuService.MenuType.Main);
-                            break;
+                            if (response.Results.Length == 0)
+                            {
+                                Write("\n\nNO RESULTS. Press any key to continue...");
+                                ReadLine();
+                                isLoopingSubMenu = false;
+                                MenuService.MenuSelection = MenuService.ShowMenu(MenuService.MainMenuOptions, MenuService.MainMenuDescriptions, MenuService.MenuType.Main);
+                                break;
+                            }
                         }
                         else
                         {
@@ -197,7 +196,7 @@ while (isLooping)
                                         Settings settings = ConfigurationService.LoadSettings();
                                         settings.ApiKey = newSettings.FirstOrDefault();
                                         ConfigurationService.SaveSettings(settings);
-                                        Write("COMPLETE. Press any key to continue...");
+                                        Write("\nCOMPLETE. Press any key to continue...");
                                         ReadLine();
                                         newSettings = null;
                                         isLoopingEditSetting = false;
@@ -261,12 +260,11 @@ while (isLooping)
                                     }
                                     else
                                     {
-                                        // Need array error checking here (wrong country)
                                         WriteLine("\nSaving...");
                                         Settings settings = ConfigurationService.LoadSettings();
                                         settings.Country = ConfigurationService.ConvertToTwoLetter(newSettings, MenuService.SettingsKeys.Country);
                                         ConfigurationService.SaveSettings(settings);
-                                        Write("COMPLETE. Press any key to continue...");
+                                        Write("\nCOMPLETE. Press any key to continue...");
                                         ReadLine();
                                         newSettings = null;
                                         isLoopingEditSetting = false;
@@ -330,12 +328,11 @@ while (isLooping)
                                     }
                                     else
                                     {
-                                        // Need array error checking here (wrong language)
                                         WriteLine("\nSaving...");
                                         Settings settings = ConfigurationService.LoadSettings();
                                         settings.Language = ConfigurationService.ConvertToTwoLetter(newSettings, MenuService.SettingsKeys.Language);
                                         ConfigurationService.SaveSettings(settings);
-                                        Write("COMPLETE. Press any key to continue...");
+                                        Write("\nCOMPLETE. Press any key to continue...");
                                         ReadLine();
                                         newSettings = null;
                                         isLoopingEditSetting = false;
