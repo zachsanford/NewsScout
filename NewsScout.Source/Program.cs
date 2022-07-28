@@ -39,15 +39,12 @@ while (isLooping)
                         if (MenuService.MenuSelection != 'b')
                         {
                             MenuService.ShowArticle(response.Results[Convert.ToInt16(MenuService.MenuSelection.ToString())]);
-                            // isLoopingSubMenu = false;
-                            // Might need to break here
                         }
                         else
                         {
                             isLoopingSubMenu = false;
                             MenuService.MenuSelection = MenuService.ShowMenu(MenuService.MainMenuOptions, MenuService.MainMenuDescriptions, MenuService.MenuType.Main);
                             response = new ApiResponse();
-                            // Might need to break here
                         }
                     }
                     else
@@ -89,7 +86,6 @@ while (isLooping)
                         // Create/Edit Query
                         Write("\nEnter your search query >> ");
                         searchQuery = ReadLine();
-                        // isLoopingSubMenu = false;
                         MenuService.MenuSelection = MenuService.ShowMenu(MenuService.SearchQueryMenuOptions, MenuService.SearchQueryMenuDescriptions, MenuService.MenuType.CustomSearch, null, searchQuery);
                         break;
 
@@ -113,15 +109,12 @@ while (isLooping)
                                     if (MenuService.MenuSelection != 'b')
                                     {
                                         MenuService.ShowArticle(response.Results[Convert.ToInt16(MenuService.MenuSelection.ToString())]);
-                                        // isLoopingSubMenu = false;
-                                        // Might need to break here
                                     }
                                     else
                                     {
                                         isLoopingSubMenu2 = false;
                                         MenuService.MenuSelection = MenuService.ShowMenu(MenuService.SearchQueryMenuOptions, MenuService.SearchQueryMenuDescriptions, MenuService.MenuType.CustomSearch, null, searchQuery);
                                         response = new ApiResponse();
-                                        // Might need to break here
                                     }
                                 }
                                 else
@@ -267,7 +260,6 @@ while (isLooping)
                                     }
                                     else
                                     {
-                                        // Need array error checking here (wrong country)
                                         WriteLine("\nSaving...");
                                         Settings settings = ConfigurationService.LoadSettings();
                                         settings.Country = ConfigurationService.ConvertToTwoLetter(newSettings, MenuService.SettingsKeys.Country);
@@ -336,7 +328,6 @@ while (isLooping)
                                     }
                                     else
                                     {
-                                        // Need array error checking here (wrong language)
                                         WriteLine("\nSaving...");
                                         Settings settings = ConfigurationService.LoadSettings();
                                         settings.Language = ConfigurationService.ConvertToTwoLetter(newSettings, MenuService.SettingsKeys.Language);
