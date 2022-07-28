@@ -1,4 +1,5 @@
-﻿using System.Net.Http.Json;
+﻿using System.Net;
+using System.Net.Http.Json;
 
 namespace NewsScout.Services
 {
@@ -29,8 +30,21 @@ namespace NewsScout.Services
 
                 using (HttpResponseMessage _response = await _client.SendAsync(_request))
                 {
-                    _response.EnsureSuccessStatusCode();
-                    return _returnResponse = await _response.Content.ReadFromJsonAsync<ApiResponse>();
+                    HttpStatusCode? _statusCode = _response.StatusCode;
+
+                    if (_statusCode == HttpStatusCode.OK)
+                    {
+                        return _returnResponse = await _response.Content.ReadFromJsonAsync<ApiResponse>();
+                    }
+                    else if (_statusCode == HttpStatusCode.Unauthorized)
+                    {
+                        WriteLine("UNAUTHORIZED. Please check your API Key and try again.");
+                        return new ApiResponse();
+                    }
+                    else
+                    {
+                        return new ApiResponse();
+                    }
                 }
             }
         }
@@ -77,8 +91,25 @@ namespace NewsScout.Services
 
                 using (HttpResponseMessage _response = await _client.SendAsync(_request))
                 {
-                    _response.EnsureSuccessStatusCode();
-                    return _returnResponse = await _response.Content.ReadFromJsonAsync<ApiResponse>();
+                    HttpStatusCode? _statusCode = _response.StatusCode;
+
+                    if (_statusCode == HttpStatusCode.OK)
+                    {
+                        return _returnResponse = await _response.Content.ReadFromJsonAsync<ApiResponse>();
+                    }
+                    else if (_statusCode == HttpStatusCode.Unauthorized)
+                    {
+                        WriteLine("\n\nUNAUTHORIZED. Please check your API Key and try again.");
+                        Write("\nPress any key to continue...");
+                        ReadLine();
+                        return new ApiResponse();
+                    }
+                    else
+                    {
+                        WriteLine("\n\nUNKNOWN ERROR. Please check your settings, internet connect and please try again.");
+                        Write("\nPress any key to continue...");
+                        return new ApiResponse();
+                    }
                 }
             }
         }

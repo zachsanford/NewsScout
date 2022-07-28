@@ -1,21 +1,18 @@
-﻿#region Manual Test Area
+﻿#region Program Variables
 
-#region MenuService Tests
-
-//char[] choices = { 'a', 'b', 'c' };
-//string userInput = "1";
-
-//char returnChar = MenuService.CheckUserSelection(userInput, choices);
-
-WriteLine(MenuService.MenuSelection);
-MenuService.MenuSelection = MenuService.ShowMenu(MenuService.MainMenuOptions, MenuService.MainMenuDescriptions, MenuService.MenuType.Main);
-ApiResponse? response = null;
+ApiResponse? response = new ApiResponse();
 string[]? newSettings = null;
 string? searchQuery = null;
 bool isLooping = true;
 bool isLoopingSubMenu = true;
 bool isLoopingSubMenu2 = true;
 bool isLoopingEditSetting = true;
+
+#endregion
+
+#region Main
+
+MenuService.MenuSelection = MenuService.ShowMenu(MenuService.MainMenuOptions, MenuService.MainMenuDescriptions, MenuService.MenuType.Main);
 
 while (isLooping)
 {
@@ -26,36 +23,51 @@ while (isLooping)
             isLooping = true;
             isLoopingSubMenu = true;
             
-            if (response == null)
+            if (response.TotalResults == null || response.TotalResults  == 0)
             {
-                Write("Gathering Articles...");
+                Write("\nGathering Articles...");
                 response = await ApiService.GetNewsWithSettingsAndSearch();
-            }        
+            }
 
-            while (isLoopingSubMenu)
+            if (response.TotalResults != null && response.TotalResults != 0)
             {
-                MenuService.MenuSelection = MenuService.ListArticles(response, MenuService.ArticleListOptions);
-                if (MenuService.ArticleListOptions.Contains(MenuService.MenuSelection))
+                while (isLoopingSubMenu)
                 {
-                    if (MenuService.MenuSelection != 'b')
+                    MenuService.MenuSelection = MenuService.ListArticles(response, MenuService.ArticleListOptions);
+                    if (MenuService.ArticleListOptions.Contains(MenuService.MenuSelection))
                     {
-                        MenuService.ShowArticle(response.Results[Convert.ToInt16(MenuService.MenuSelection.ToString())]);
-                        // isLoopingSubMenu = false;
-                        // Might need to break here
+                        if (MenuService.MenuSelection != 'b')
+                        {
+                            MenuService.ShowArticle(response.Results[Convert.ToInt16(MenuService.MenuSelection.ToString())]);
+                            // isLoopingSubMenu = false;
+                            // Might need to break here
+                        }
+                        else
+                        {
+                            isLoopingSubMenu = false;
+                            MenuService.MenuSelection = MenuService.ShowMenu(MenuService.MainMenuOptions, MenuService.MainMenuDescriptions, MenuService.MenuType.Main);
+                            response = new ApiResponse();
+                            // Might need to break here
+                        }
                     }
                     else
                     {
-                        isLoopingSubMenu = false;
-                        MenuService.MenuSelection = MenuService.ShowMenu(MenuService.MainMenuOptions, MenuService.MainMenuDescriptions, MenuService.MenuType.Main);
-                        response = null;
-                        // Might need to break here
+                        Write($"{MenuService.MenuSelection} is not a correct choice! Please try again >> ");
+                        MenuService.MenuSelection = MenuService.ListArticles(response, MenuService.ArticleListOptions);
                     }
                 }
-                else
-                {
-                    Write($"{MenuService.MenuSelection} is not a correct choice! Please try again >> ");
-                    MenuService.MenuSelection = MenuService.ListArticles(response, MenuService.ArticleListOptions);
-                }
+            }
+            else if (response.Results.Length == 0)
+            {
+                Write("\n\nNO RESULTS. Press any key to continue...");
+                ReadLine();
+                MenuService.MenuSelection = MenuService.ShowMenu(MenuService.MainMenuOptions, MenuService.MainMenuDescriptions, MenuService.MenuType.Main);
+                break;
+            }
+            else
+            {
+                MenuService.MenuSelection = MenuService.ShowMenu(MenuService.MainMenuOptions, MenuService.MainMenuDescriptions, MenuService.MenuType.Main);
+                break;
             }
 
             break;
@@ -82,36 +94,53 @@ while (isLooping)
                         // Run Query
                         isLoopingSubMenu2 = true;
 
-                        if (response == null)
+                        if (response.TotalResults == null || response.TotalResults == 0)
                         {
-                            Write("Gathering Articles...");
+                            Write("\nGathering Articles...");
                             response = await ApiService.GetNewsWithSettingsAndSearch(searchQuery);
                         }
 
-                        while (isLoopingSubMenu)
+                        if (response.TotalResults != null && response.TotalResults != 0)
                         {
-                            MenuService.MenuSelection = MenuService.ListArticles(response, MenuService.ArticleListOptions);
-                            if (MenuService.ArticleListOptions.Contains(MenuService.MenuSelection))
+                            while (isLoopingSubMenu2)
                             {
-                                if (MenuService.MenuSelection != 'b')
+                                MenuService.MenuSelection = MenuService.ListArticles(response, MenuService.ArticleListOptions);
+                                if (MenuService.ArticleListOptions.Contains(MenuService.MenuSelection))
                                 {
-                                    MenuService.ShowArticle(response.Results[Convert.ToInt16(MenuService.MenuSelection.ToString())]);
-                                    // isLoopingSubMenu = false;
-                                    // Might need to break here
+                                    if (MenuService.MenuSelection != 'b')
+                                    {
+                                        MenuService.ShowArticle(response.Results[Convert.ToInt16(MenuService.MenuSelection.ToString())]);
+                                        // isLoopingSubMenu = false;
+                                        // Might need to break here
+                                    }
+                                    else
+                                    {
+                                        isLoopingSubMenu2 = false;
+                                        MenuService.MenuSelection = MenuService.ShowMenu(MenuService.SearchQueryMenuOptions, MenuService.SearchQueryMenuDescriptions, MenuService.MenuType.CustomSearch, null, searchQuery);
+                                        response = new ApiResponse();
+                                        // Might need to break here
+                                    }
                                 }
                                 else
                                 {
-                                    isLoopingSubMenu = false;
-                                    MenuService.MenuSelection = MenuService.ShowMenu(MenuService.SearchQueryMenuOptions, MenuService.SearchQueryMenuDescriptions, MenuService.MenuType.CustomSearch, null, searchQuery);
-                                    response = null;
-                                    // Might need to break here
+                                    Write($"{MenuService.MenuSelection} is not a correct choice! Please try again >> ");
+                                    MenuService.MenuSelection = MenuService.ListArticles(response, MenuService.ArticleListOptions);
                                 }
                             }
-                            else
-                            {
-                                Write($"{MenuService.MenuSelection} is not a correct choice! Please try again >> ");
-                                MenuService.MenuSelection = MenuService.ListArticles(response, MenuService.ArticleListOptions);
-                            }
+                        }
+                        else if (response.Results.Length == 0)
+                        {
+                            Write("\n\nNO RESULTS. Press any key to continue...");
+                            ReadLine();
+                            isLoopingSubMenu = false;
+                            MenuService.MenuSelection = MenuService.ShowMenu(MenuService.MainMenuOptions, MenuService.MainMenuDescriptions, MenuService.MenuType.Main);
+                            break;
+                        }
+                        else
+                        {
+                            isLoopingSubMenu = false;
+                            MenuService.MenuSelection = MenuService.ShowMenu(MenuService.MainMenuOptions, MenuService.MainMenuDescriptions, MenuService.MenuType.Main);
+                            break;
                         }
 
                         break;
@@ -350,8 +379,5 @@ while (isLooping)
             break;
     }
 }
-
-#endregion
-
 
 #endregion
