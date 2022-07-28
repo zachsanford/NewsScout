@@ -25,5 +25,19 @@ namespace NewsScout.Tests
             // Assert
             Assert.IsNotNull(testResponse);
         }
+
+        [DataTestMethod]
+        [DataRow("  This is a search ")]
+        public void TestConvertSearchForURL_Correct(string _searchQuery)
+        {
+            // Arrange
+            string expectedOutput = "This%20is%20a%20search";
+
+            // Act
+            string testOutput = ApiService.ConvertSearchForURL(_searchQuery);
+
+            // Assert
+            Assert.AreEqual(expectedOutput, testOutput);
+        }
     }
 }

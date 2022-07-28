@@ -5,6 +5,12 @@ namespace NewsScout.Services
     public class ApiService
     {
 
+        #region Properties
+
+        public string CustomQuery { get; set; }
+
+        #endregion
+
         #region Methods
 
         // General Request
@@ -70,6 +76,25 @@ namespace NewsScout.Services
                     return _returnResponse = await _response.Content.ReadFromJsonAsync<ApiResponse>();
                 }
             }
+        }
+
+        // Convert custom search string to URL friendly version
+        public static string ConvertSearchForURL(string _searchQuery)
+        {
+            StringBuilder _returnString = new StringBuilder();
+            _searchQuery = _searchQuery.Trim();
+
+            // Spaces
+            string _urlSpace = "%20";
+            string[] _wordArray = _searchQuery.Split(' ');
+
+            foreach (string _word in _wordArray)
+            {
+                _returnString.Append(_word + _urlSpace);
+            }
+            _returnString.Length = _returnString.Length - 3;
+
+            return _returnString.ToString();
         }
 
         #endregion

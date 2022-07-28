@@ -7,7 +7,7 @@
 
         public static char MenuSelection { get; set; }
         public enum SettingsKeys { ApiKey, Country, Language }
-        public enum MenuType { Main, Settings, ApiSettings, CountrySettings, LanguageSettings }
+        public enum MenuType { Main, Settings, ApiSettings, CountrySettings, LanguageSettings, CustomSearch }
         public static ReadOnlyCollection<char> MainMenuOptions { get; private set; } = new List<char>
         {
             '0', // Get results with current settings
@@ -62,6 +62,18 @@
             '8',
             '9',
             'b'  // Go back
+        }.AsReadOnly();
+        public static ReadOnlyCollection<char> SearchQueryMenuOptions { get; private set; } = new List<char>
+        {
+            '0', // Create/Edit Query
+            '1', // Run Query
+            'b'  // Go back
+        }.AsReadOnly();
+        public static ReadOnlyCollection<string> SearchQueryMenuDescriptions { get; private set; } = new List<string>
+        {
+            "0) - Create/Edit Search Query -",
+            "1) - Run Query -",
+            "b) - Go Back -"
         }.AsReadOnly();
 
         #endregion
@@ -220,7 +232,7 @@
         }
 
         // Generic display the Menu Options
-        public static char ShowMenu(ReadOnlyCollection<char> _menuOptions, ReadOnlyCollection<string> _menuDescriptions, Enum _menuType, string[]? _extraOptions = null)
+        public static char ShowMenu(ReadOnlyCollection<char> _menuOptions, ReadOnlyCollection<string> _menuDescriptions, Enum _menuType, string[]? _extraOptions = null, string? _extraOption = null)
         {
             ShowMainMenuHeader();
 
@@ -240,6 +252,10 @@
 
                 case MenuType.LanguageSettings:
                     ShowEditValues(SettingsKeys.Language, _extraOptions);
+                    break;
+
+                case MenuType.CustomSearch:
+                    ShowCustomSearchMenu(_extraOption);
                     break;
 
                 default:
@@ -368,6 +384,24 @@
 
             Write("\nPress any key to go back to the list...");
             ReadLine();
+        }
+
+        // Custom search query menu
+        private static void ShowCustomSearchMenu(string? _searchQuery = null)
+        {
+            ShowMainMenuHeader();
+            WriteLine("     Search Query:");
+            if (_searchQuery != null)
+            {
+                WriteLine($"          {_searchQuery}");
+            }
+            else
+            {
+                WriteLine("          NO SEARCH ENTERED");
+            }
+
+            WriteLine();
+            WriteLine("###########################################################\n");
         }
 
         // Quit the program

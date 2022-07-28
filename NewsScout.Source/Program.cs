@@ -61,6 +61,28 @@ while (isLooping)
             // Get results with search query
             isLooping = true;
             isLoopingSubMenu = true;
+            MenuService.MenuSelection = MenuService.ShowMenu(MenuService.SearchQueryMenuOptions, MenuService.SearchQueryMenuDescriptions, MenuService.MenuType.CustomSearch);
+
+            while (isLoopingSubMenu)
+            {
+                switch (MenuService.MenuSelection)
+                {
+                    case '0':
+                        // Create/Edit Query
+                        break;
+
+                    case '1':
+                        // Run Query
+                        break;
+
+                    case 'b':
+                        // Go back
+                        break;
+
+                    default:
+                        break;
+                }
+            }
 
             break;
 
