@@ -119,8 +119,6 @@ namespace NewsScout.Services
         {
             StringBuilder _returnString = new StringBuilder();
             _searchQuery = _searchQuery.Trim();
-
-            // Spaces
             string _urlSpace = "%20";
             string[] _wordArray = _searchQuery.Split(' ');
 
