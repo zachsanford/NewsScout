@@ -11,6 +11,9 @@
 *.userosscache
 *.sln.docstates
 
+# NewsScout Solution File
+NewsScout.Source/NewsScout.sln
+
 # User-specific files (MonoDevelop/Xamarin Studio)
 *.userprefs
 
