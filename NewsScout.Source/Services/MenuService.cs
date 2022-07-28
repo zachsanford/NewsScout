@@ -7,7 +7,7 @@
 
         public static char MenuSelection { get; set; }
         public enum SettingsKeys { ApiKey, Country, Language }
-        public enum MenuType { Main, Settings, ApiSettings, CountrySettings, LanguageSettings }
+        public enum MenuType { Main, Settings, ApiSettings, CountrySettings, LanguageSettings, CustomSearch }
         public static ReadOnlyCollection<char> MainMenuOptions { get; private set; } = new List<char>
         {
             '0', // Get results with current settings
@@ -48,6 +48,32 @@
             "0) - Enter New Value -",
             "1) - Save Changes -",
             "b) - Discard Changes and Go Back -"
+        }.AsReadOnly();
+        public static ReadOnlyCollection<char> ArticleListOptions { get; private set; } = new List<char>
+        {
+            '0',
+            '1',
+            '2',
+            '3',
+            '4',
+            '5',
+            '6',
+            '7',
+            '8',
+            '9',
+            'b'  // Go back
+        }.AsReadOnly();
+        public static ReadOnlyCollection<char> SearchQueryMenuOptions { get; private set; } = new List<char>
+        {
+            '0', // Create/Edit Query
+            '1', // Run Query
+            'b'  // Go back
+        }.AsReadOnly();
+        public static ReadOnlyCollection<string> SearchQueryMenuDescriptions { get; private set; } = new List<string>
+        {
+            "0) - Create/Edit Search Query -",
+            "1) - Run Query -",
+            "b) - Go Back -"
         }.AsReadOnly();
 
         #endregion
@@ -206,7 +232,7 @@
         }
 
         // Generic display the Menu Options
-        public static char ShowMenu(ReadOnlyCollection<char> _menuOptions, ReadOnlyCollection<string> _menuDescriptions, Enum _menuType, string[]? _extraOptions = null)
+        public static char ShowMenu(ReadOnlyCollection<char> _menuOptions, ReadOnlyCollection<string> _menuDescriptions, Enum _menuType, string[]? _extraOptions = null, string? _extraOption = null)
         {
             ShowMainMenuHeader();
 
@@ -226,6 +252,10 @@
 
                 case MenuType.LanguageSettings:
                     ShowEditValues(SettingsKeys.Language, _extraOptions);
+                    break;
+
+                case MenuType.CustomSearch:
+                    ShowCustomSearchMenu(_extraOption);
                     break;
 
                 default:
@@ -269,6 +299,109 @@
             }
 
             return _splitUserInput;
+        }
+
+        // Show list of articles
+        public static char ListArticles(ApiResponse _articles, ReadOnlyCollection<char> _menuOptions)
+        {
+            ShowMainMenuHeader();
+
+            for (int i = 0; i < 10; i++)
+            {
+                if (!string.IsNullOrEmpty(_articles.Results[i].Title))
+                {
+                    WriteLine($"{i}) - {_articles.Results[i].Title}");
+                }
+                else
+                {
+                    WriteLine($"{i}) - NO TITLE");
+                }
+
+                if (!string.IsNullOrEmpty(_articles.Results[i].Description))
+                {
+                    WriteLine($"{_articles.Results[i].Description}");
+                }
+                else
+                {
+                    WriteLine("NO DESCRIPTION");
+                }
+                WriteLine();
+            }
+
+            WriteLine("b) - Go back -");
+            Write("\nPlease enter your selection >> ");
+            return CheckUserSelection(ReadLine(), _menuOptions.ToArray());
+        }
+
+        // Show specific article
+        public static void ShowArticle(Result _individualResult)
+        {
+            ShowMainMenuHeader();
+
+            if (!string.IsNullOrEmpty(_individualResult.Title))
+            {
+                WriteLine("TITLE:");
+                WriteLine($"\n{_individualResult.Title}");
+            }
+            else
+            {
+                WriteLine("TITLE:");
+                WriteLine($"\nNOT AVAILABLE");
+            }
+
+            if (!string.IsNullOrEmpty(_individualResult.Description))
+            {
+                WriteLine("\nDESCRIPTION:");
+                WriteLine($"\n{_individualResult.Description}");
+            }
+            else
+            {
+                WriteLine("\nDESCRIPTION:");
+                WriteLine($"\nNOT AVAILABLE");
+            }
+
+            if (!string.IsNullOrEmpty(_individualResult.Content))
+            {
+                WriteLine("\nCONTENT:");
+                WriteLine($"\n{_individualResult.Content}");
+            }
+            else
+            {
+                WriteLine("\nCONTENT:");
+                WriteLine($"\nNOT AVAILABLE");
+            }
+
+            if (!string.IsNullOrEmpty(_individualResult.Link))
+            {
+                WriteLine("\nLINK TO ARTICLE:");
+                WriteLine($"\n{_individualResult.Link}");
+            }
+            else
+            {
+                WriteLine("\nLINK TO ARTICLE:");
+                WriteLine($"\nNOT AVAILABLE");
+            }
+
+            Write("\nPress any key to go back to the list...");
+            ReadLine();
+        }
+
+        // Custom search query menu
+        private static void ShowCustomSearchMenu(string? _searchQuery = null)
+        {
+            ShowMainMenuHeader();
+            WriteLine("     Search Query:");
+            if (_searchQuery != null)
+            {
+                WriteLine($"          {_searchQuery}");
+            }
+            else
+            {
+                WriteLine("          NO SEARCH ENTERED");
+            }
+
+            WriteLine();
+            WriteLine("###########################################################\n");
         }
 
         // Quit the program
