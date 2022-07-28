@@ -47,6 +47,6 @@ There is a settings menu where you can change the API Key, country of origin and
 
 Want to contribute? Please do so by creating a pull request. Be sure to leave a notes detailing your changes.
 
-## License ![GitHub](https://img.shields.io/github/license/zachsanford/NewsScout)
+## License ![GitHub](https://img.shields.io/github/license/zachsanford/NewsScouts)
 
 This project is licensed under the MIT License. Check out the [LICENSE.txt](https://github.com/zachsanford/NewsScout/blob/master/LICENSE.txt) file for additional details.
