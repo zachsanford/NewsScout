@@ -302,12 +302,15 @@
         }
 
         // Show list of articles
-        public static char ListArticles(ApiResponse _articles, ReadOnlyCollection<char> _menuOptions)
+        public static char ListArticles(ApiResponse? _articles, ReadOnlyCollection<char> _menuOptions)
         {
             ShowMainMenuHeader();
 
-            for (int i = 0; i < 10; i++)
+            List<char> _dynamicList = new List<char>();
+
+            for (int i = 0; i < _articles.Results.Length; i++)
             {
+                _dynamicList.Add(Convert.ToChar(i.ToString()));
                 if (!string.IsNullOrEmpty(_articles.Results[i].Title))
                 {
                     WriteLine($"{i}) - {_articles.Results[i].Title}");
@@ -328,9 +331,11 @@
                 WriteLine();
             }
 
+            _dynamicList.Add('b');
+
             WriteLine("b) - Go back -");
             Write("\nPlease enter your selection >> ");
-            return CheckUserSelection(ReadLine(), _menuOptions.ToArray());
+            return CheckUserSelection(ReadLine(), _dynamicList.ToArray());
         }
 
         // Show specific article
