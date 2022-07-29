@@ -49,7 +49,7 @@ After installing .NET 6, you can insert the API key into the `settings.json` fil
 <a name="usage"></a>
 ## :book: Usage
 
-Once the program is run, you can show the latest articles with the current program settings, or you can search through the headlines with a custom search.
+Once the program is running, you can show the latest articles with the current program settings, or you can search through the headlines with a custom search.
 
 ![Search](assets/NewsScout-Search.gif)
 
