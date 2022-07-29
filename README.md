@@ -24,6 +24,14 @@ Quickly get the latest news in a command line interface. Supports custom search 
 </a>
 </div>
 
+## Table of Contents
+1. [Getting Started](#getting-started)
+2. [Usage](#usage)
+3. [Settings](#settings)
+4. [Contributing](#contributing)
+5. [License](#license)
+
+<a name="getting-started"></a>
 ## :mega: Getting Started
 
 To run this program you will need these items:
@@ -35,22 +43,26 @@ To run this program you will need these items:
 
 After installing .NET 6, you can insert the API key into the `settings.json` file that is located in the `Configuration` directory or you can set the API Key in the settings menu after compiling the code.
 
+<a name="usage"></a>
 ## :book: Usage
 
 Once the program is run, you can show the latest articles with the current program settings, or you can search through the headlines with a custom search.
 
 ![Search](assets/NewsScout-Search.gif)
 
+<a name="settings"></a>
 ## :wrench: Settings
 
 There is a settings menu where you can change the API Key, country of origin and languages. As of right now you can search with up to five countries and languages.
 
 ![Settings](assets/NewsScout-Settings.gif)
 
+<a name="contributing"><a/>
 ## :construction: Contributing <img alt="GitHub contributors" src="https://img.shields.io/github/contributors/zachsanford/NewsScout">
 
 Want to contribute? Please do so by creating a pull request. Be sure to leave a notes detailing your changes.
 
+<a name="license"><a/>
 ## :page_with_curl: License <img alt="GitHub" src="https://img.shields.io/github/license/zachsanford/NewsScout">
 
 This project is licensed under the MIT License. Check out the [LICENSE.txt](https://github.com/zachsanford/NewsScout/blob/master/LICENSE.txt) file for additional details.
