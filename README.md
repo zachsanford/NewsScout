@@ -13,10 +13,10 @@ Quickly get the latest news in a command line interface. Supports custom search 
 </small>
 <br />
 <a href="https://github.com/zachsanford/NewsScout">
-    <img src="https://img.shields.io/github/stars/zachsanford/NewsScout.svg?style=social&label=Star">
+    <img alt="GitHub Repo stars" src="https://img.shields.io/github/stars/zachsanford/NewsScout?style=social">
 </a>
 <a href="https://github.com/zachsanford/NewsScout/fork">
-    <img src="https://img.shields.io/github/forks/zachsanford/NewsScout.svg?style=social&label=Fork">
+    <img alt="GitHub forks" src="https://img.shields.io/github/forks/zachsanford/NewsScout?style=social">
 </a>
 </div>
 
