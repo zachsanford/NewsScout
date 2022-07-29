@@ -1,10 +1,10 @@
 # News Scout
 
-<img alt="GitHub release (latest by date)" src="https://img.shields.io/github/v/release/zachsanford/NewsScout">
-<img alt="Platforms" src="https://img.shields.io/badge/Platforms-Windows%20%7C%20macOS%20%7C%20Linux-blue">
-<img alt=".NET Version" src="https://img.shields.io/badge/.NET%20Version-.NET%206-blueviolet">
-
-<br />
+<div style="display: inline;">
+    <img alt="GitHub release (latest by date)" src="https://img.shields.io/github/v/release/zachsanford/NewsScout">
+    <img alt="Platforms" src="https://img.shields.io/badge/Platforms-Windows%20%7C%20macOS%20%7C%20Linux-blue">
+    <img alt=".NET Version" src="https://img.shields.io/badge/.NET%20Version-.NET%206-blueviolet">
+</div>
 
 ![Main-Menu](assets/NewsScout-Main.gif)
 
