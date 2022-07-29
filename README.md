@@ -43,7 +43,7 @@ There is a settings menu where you can change the API Key, country of origin and
 
 ![Settings](assets/NewsScout-Settings.gif)
 
-## Contributing ![GitHub](https://img.shields.io/github/contributors/zachsanford/NewsScout)
+## Contributing <img alt="GitHub" src="https://img.shields.io/github/license/zachsanford/NewsScout">
 
 Want to contribute? Please do so by creating a pull request. Be sure to leave a notes detailing your changes.
 
