@@ -33,8 +33,8 @@ while (isLooping)
             {
                 while (isLoopingSubMenu)
                 {
-                    MenuService.MenuSelection = MenuService.ListArticles(response, MenuService.ArticleListOptions);
-                    if (MenuService.ArticleListOptions.Contains(MenuService.MenuSelection))
+                    MenuService.MenuSelection = MenuService.ListArticles(response);
+                    if (MenuService.ArticleListPossibleOptions.Contains(MenuService.MenuSelection))
                     {
                         if (MenuService.MenuSelection != 'b')
                         {
@@ -50,7 +50,7 @@ while (isLooping)
                     else
                     {
                         Write($"{MenuService.MenuSelection} is not a correct choice! Please try again >> ");
-                        MenuService.MenuSelection = MenuService.ListArticles(response, MenuService.ArticleListOptions);
+                        MenuService.MenuSelection = MenuService.ListArticles(response);
                     }
                 }
             }
@@ -103,8 +103,8 @@ while (isLooping)
                         {
                             while (isLoopingSubMenu2)
                             {
-                                MenuService.MenuSelection = MenuService.ListArticles(response, MenuService.ArticleListOptions);
-                                if (MenuService.ArticleListOptions.Contains(MenuService.MenuSelection))
+                                MenuService.MenuSelection = MenuService.ListArticles(response);
+                                if (MenuService.ArticleListPossibleOptions.Contains(MenuService.MenuSelection))
                                 {
                                     if (MenuService.MenuSelection != 'b')
                                     {
@@ -120,7 +120,7 @@ while (isLooping)
                                 else
                                 {
                                     Write($"{MenuService.MenuSelection} is not a correct choice! Please try again >> ");
-                                    MenuService.MenuSelection = MenuService.ListArticles(response, MenuService.ArticleListOptions);
+                                    MenuService.MenuSelection = MenuService.ListArticles(response);
                                 }
                             }
                         }

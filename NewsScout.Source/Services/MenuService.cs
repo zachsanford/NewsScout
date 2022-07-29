@@ -49,7 +49,7 @@
             "1) - Save Changes -",
             "b) - Discard Changes and Go Back -"
         }.AsReadOnly();
-        public static ReadOnlyCollection<char> ArticleListOptions { get; private set; } = new List<char>
+        public static ReadOnlyCollection<char> ArticleListPossibleOptions { get; private set; } = new List<char>
         {
             '0',
             '1',
@@ -302,7 +302,7 @@
         }
 
         // Show list of articles
-        public static char ListArticles(ApiResponse? _articles, ReadOnlyCollection<char> _menuOptions)
+        public static char ListArticles(ApiResponse? _articles)
         {
             ShowMainMenuHeader();
 
