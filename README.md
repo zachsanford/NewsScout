@@ -3,7 +3,7 @@
 <div style="display: inline;">
     <img alt="GitHub release (latest by date)" src="https://img.shields.io/github/v/release/zachsanford/NewsScout">
     <img alt="Platforms" src="https://img.shields.io/badge/Platforms-Windows%20%7C%20macOS%20%7C%20Linux-blue">
-    <img alt=".NET Version" src="https://img.shields.io/badge/.NET%20Version-.NET%206-blueviolet">
+    <img alt=".NET Version" src="https://img.shields.io/badge/.NET%20Version-.NET%207-blueviolet">
 </div>
 <br />
 
@@ -41,7 +41,7 @@ To run this program you will need these items:
 
 | Item | Link | As of the Initial Release|
 | --- | --- | --- |
-| .NET 6 | [Get the latest version](https://dotnet.microsoft.com/en-us/download/dotnet/6.0) | .NET is on v6.0.7 |
+| .NET 7 | [Get the latest version](https://dotnet.microsoft.com/en-us/download/dotnet/7.0) | .NET is on v7.0.2 |
 | News Data API Key | [Register for a free API Key](https://newsdata.io/register) | Free: API Credits - 200/day, Articles per Credit - 10 |
 
 After installing .NET 6, you can insert the API key into the `settings.json` file that is located in the `Configuration` directory or you can set the API Key in the settings menu after compiling the code.
