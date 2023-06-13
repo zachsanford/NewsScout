@@ -63,7 +63,7 @@ There is a settings menu where you can change the API Key, country of origin and
 <a name="contributing"><a/>
 ## :construction: Contributing <img alt="GitHub contributors" src="https://img.shields.io/github/contributors/zachsanford/NewsScout">
 
-Want to contribute? Please do so by creating a pull request. Be sure to leave a notes detailing your changes.
+Want to contribute? Please do so by creating a pull request. Be sure to leave a note detailing your changes.
 
 <a name="license"><a/>
 ## :page_with_curl: License <img alt="GitHub" src="https://img.shields.io/github/license/zachsanford/NewsScout">
