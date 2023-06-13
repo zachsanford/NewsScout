@@ -5,7 +5,7 @@
         public string? Status { get; set; }
         public int? TotalResults { get; set; }
         public Result[]? Results { get; set; }
-        public int? NextPage { get; set; }
+        public string? NextPage { get; set; }
     }
 
     public class Result
