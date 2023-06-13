@@ -44,7 +44,7 @@ To run this program you will need these items:
 | .NET 7 | [Get the latest version](https://dotnet.microsoft.com/en-us/download/dotnet/7.0) | .NET is on v7.0.2 |
 | News Data API Key | [Register for a free API Key](https://newsdata.io/register) | Free: API Credits - 200/day, Articles per Credit - 10 |
 
-After installing .NET 6, you can insert the API key into the `settings.json` file that is located in the `Configuration` directory or you can set the API Key in the settings menu after compiling the code.
+After installing .NET 7, you can insert the API key into the `settings.json` file that is located in the `Configuration` directory or you can set the API Key in the settings menu after compiling the code.
 
 <a name="usage"></a>
 ## :book: Usage
